@@ -10,8 +10,9 @@ public class Movie
     private String           plot;
     private String           fullplot;
     private List<String>     genres;
-    private String           title;
     private int              year;
+    private int              runtime;
+    private String           title;
 
     public String getPlot()
     {
@@ -42,16 +43,6 @@ public class Movie
     {
         this.genres = genres;
     }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
     
     public int getYear()
     {
@@ -63,9 +54,29 @@ public class Movie
         this.year = year;
     }
 
+    public int getRuntime()
+    {
+        return runtime;
+    }
+
+    public void setRuntime(int runtime)
+    {
+        this.runtime = runtime;
+    }
+    
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    } 
+
     @Override
     public String toString()
     {
-        return "Movie [\n  plot=" + WordUtils.wrap(fullplot, WORD_WRAP) + ",\n  genres=" + genres + ",\n  title=" + title + ",\n  year=" + year + "\n]";
+        return "Movie [\n  plot=" + WordUtils.wrap(fullplot, WORD_WRAP) + ",\n  genres=" + genres + ",\n  runtime=" + runtime + " mins,\n  year=" + year + "\n]";
     }
 }
