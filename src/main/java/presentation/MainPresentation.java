@@ -23,7 +23,6 @@ public class MainPresentation extends StackPane
         JFXTextField titleField = new JFXTextField();
         titleField.setPromptText("Movie Title");
         titleField.setLabelFloat(true);
-        titleField.setMinWidth(200);
         JFXButton queryTitleButton = new JFXButton("Query Title");
         queryTitleButton.setDefaultButton(true);
         queryTitleButton.getStyleClass().add("button-raised");
@@ -32,7 +31,6 @@ public class MainPresentation extends StackPane
         JFXTextField directorField = new JFXTextField();
         directorField.setPromptText("Movie Director");
         directorField.setLabelFloat(true);
-        directorField.setMinWidth(200);
         JFXButton queryDirectorButton = new JFXButton("Query Director");
         queryDirectorButton.setDefaultButton(true);
         queryDirectorButton.getStyleClass().add("button-raised");
