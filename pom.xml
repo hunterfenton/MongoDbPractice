@@ -19,7 +19,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.guerillawarefare.controller.MyCostTestTool</mainClass>
+							<mainClass>controller.MongoDbPractice</mainClass>
 							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>
