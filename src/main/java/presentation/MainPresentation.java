@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 
 public class MainPresentation extends StackPane
 {
-    private static final double RESPONSE_WIDTH = 400.0;
+    private static final double RESPONSE_WIDTH  = 400.0;
     private static final double RESPONSE_HEIGHT = 300.0;
     
     public MainPresentation(MainController controller)
