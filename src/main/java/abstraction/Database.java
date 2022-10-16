@@ -1,9 +1,10 @@
 package abstraction;
 
 import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
-import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+
+import java.util.regex.Pattern;
 
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -13,6 +14,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 
 import abstaction.immutable.User;
 
@@ -50,7 +52,8 @@ public class Database
         String detailString = "";
         try
         {
-            Movie movie =  mongoClient.getDatabase("sample_mflix").withCodecRegistry(pojoCodecRegistry).getCollection("movies", Movie.class).find(eq("title", title)).first();
+            Pattern pattern = Pattern.compile(new StringBuilder("(?i)^").append(title).append("$").toString(), Pattern.CASE_INSENSITIVE);
+            Movie movie =  mongoClient.getDatabase("sample_mflix").withCodecRegistry(pojoCodecRegistry).getCollection("movies", Movie.class).find(Filters.regex("title", pattern)).first();
             detailString = movie.toString();
         }
         catch (Exception e)
@@ -65,7 +68,7 @@ public class Database
     public String findMoviesFromDirector(String director)
     {
         String detailString = "";
-        FindIterable<Movie> movies = movieCollection.find(eq("directors", director));
+        FindIterable<Movie> movies = movieCollection.find(Filters.regex("directors", Pattern.compile(new StringBuilder("(?i)^").append(director).append("$").toString(), Pattern.CASE_INSENSITIVE)));
         for (Movie movie : movies)
         {
             detailString += movie.getTitle()+"\n";
