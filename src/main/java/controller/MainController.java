@@ -3,7 +3,8 @@ package controller;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import abstraction.MongoDbConnection;
+import abstaction.immutable.User;
+import abstraction.Database;
 import presentation.MainModel;
 import presentation.MainPresentation;
 
@@ -25,11 +26,23 @@ public class MainController
     
     public void queryMovieByTitle(String title)
     {        
-        executor.submit(() -> model.setMovieResult(MongoDbConnection.findMovieFromTitle(title)));
+        executor.submit(() -> model.setMovieResult(Database.getInstance().findMovieFromTitle(title)));
     }
+    
     public void queryMovieByDirector(String director)
     {        
-        executor.submit(() -> model.setMovieResult(MongoDbConnection.findMoviesFromDirector(director)));
+        executor.submit(() -> model.setMovieResult(Database.getInstance().findMoviesFromDirector(director)));
+    }
+    
+    public void setUser(User user)
+    {        
+        Database.getInstance().setUser(user);
+    }
+    
+    void shutdown()
+    {
+        Database.getInstance().disconnect();
+        executor.shutdownNow();
     }
     
     MainPresentation getPresentation()

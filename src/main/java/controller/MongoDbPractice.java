@@ -20,7 +20,8 @@ public class MongoDbPractice extends Application
     @Override
     public void start(Stage stage) throws ClassNotFoundException, SQLException
     {
-        JFXDecorator decorator = new JFXDecorator(stage, new StackPane(new MainController().getPresentation()), false, true, true);
+        MainController controller =new MainController();
+        JFXDecorator decorator = new JFXDecorator(stage, new StackPane(controller.getPresentation()), false, true, true);
         Scene scene = new Scene(decorator);
         scene.getStylesheets().add("style.css");
         
@@ -28,11 +29,12 @@ public class MongoDbPractice extends Application
         stage.setScene(scene);        
         stage.show();
         stage.sizeToScene();
-    }
-    
-    @Override
-    public void stop()
-    {
-        Platform.exit();
+        
+        stage.setOnCloseRequest(e -> 
+        {
+            controller.shutdown();
+            Platform.exit();
+            System.exit(0);
+        });
     }
 }

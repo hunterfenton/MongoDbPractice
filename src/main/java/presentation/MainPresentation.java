@@ -1,10 +1,13 @@
 package presentation;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 
+import abstaction.immutable.User;
 import controller.MainController;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -20,6 +23,12 @@ public class MainPresentation extends StackPane
     public MainPresentation(MainController controller)
     {
         setPadding(new Insets(5.0));
+        
+        JFXComboBox<User> userBox = new JFXComboBox<User>(FXCollections.observableArrayList(User.values()));
+        userBox.setPromptText("Database User");
+        userBox.setLabelFloat(true);
+        userBox.valueProperty().addListener((o, oldVal, newVal) -> controller.setUser(newVal));
+        
         JFXTextField titleField = new JFXTextField();
         titleField.setPromptText("Movie Title");
         titleField.setLabelFloat(true);
@@ -46,7 +55,7 @@ public class MainPresentation extends StackPane
         HBox.setHgrow(directorField, Priority.ALWAYS);
         HBox titleQueryBox = new HBox(titleField, queryTitleButton);
         HBox directoryQueryBox = new HBox(directorField, queryDirectorButton);
-        VBox mainBox = new VBox(20.0, new Text(""), titleQueryBox, directoryQueryBox, responseArea);
+        VBox mainBox = new VBox(20.0, new Text(""), userBox, titleQueryBox, directoryQueryBox, responseArea);
         
         getChildren().add(mainBox);
     }
