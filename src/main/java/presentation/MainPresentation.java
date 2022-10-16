@@ -19,10 +19,12 @@ public class MainPresentation extends StackPane
 {
     private static final double RESPONSE_WIDTH  = 400.0;
     private static final double RESPONSE_HEIGHT = 300.0;
+    private static final double PADDING         = 5.0;
+    private static final double SPACING         = 25.0;
     
     public MainPresentation(MainController controller)
     {
-        setPadding(new Insets(5.0));
+        setPadding(new Insets(PADDING));
         
         JFXComboBox<User> userBox = new JFXComboBox<User>(FXCollections.observableArrayList(User.values()));
         userBox.setPromptText("Database User");
@@ -55,7 +57,7 @@ public class MainPresentation extends StackPane
         HBox.setHgrow(directorField, Priority.ALWAYS);
         HBox titleQueryBox = new HBox(titleField, queryTitleButton);
         HBox directoryQueryBox = new HBox(directorField, queryDirectorButton);
-        VBox mainBox = new VBox(20.0, new Text(""), userBox, titleQueryBox, directoryQueryBox, responseArea);
+        VBox mainBox = new VBox(SPACING, new Text("Query a Sample Movie Database"), userBox, titleQueryBox, directoryQueryBox, responseArea);
         
         getChildren().add(mainBox);
     }
